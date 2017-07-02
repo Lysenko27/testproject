@@ -1,8 +1,4 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from pages.base import Page
-from selenium.webdriver.support.ui import WebDriverWait
-import time
 class ComposeMailPage(Page):
     def __init__(self, driver):
         self.from_xpath = '//div[@is="x-bubbles"]'

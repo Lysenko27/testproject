@@ -1,10 +1,7 @@
 import unittest
 from selenium import webdriver
 from pages.login_page import *
-from pages.mailer_main_page import *
-from pages.compose_mail_page import *
 from shortcuts import *
-from selenium.webdriver.common.by import By
 import time
 import datetime
 
@@ -20,12 +17,13 @@ class TestMail(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.set_page_load_timeout(30)
+        self.driver.implicitly_wait(10)
         self.driver.get("https://mail.yandex.ru")
         LoginPage(self.driver).login('rocketbank-fan','qwerty$4')
 
+
     def test_mail_send_and_delete(self):
         mailer_page = MailerMainPage(self.driver)
-        time.sleep(5)
         subject = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
         send_email(
           self.driver,
@@ -48,9 +46,10 @@ class TestMail(unittest.TestCase):
           0
         ) # should be zero emails by now
 
+
     def tearDown(self):
         self.driver.close()
 
 if __name__ == "__main__":
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestPages)
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestMail)
     unittest.TextTestRunner(verbosity=2).run(suite)
