@@ -33,7 +33,7 @@ class TestMail(unittest.TestCase):
         send_email(self.driver,subject)
         wait_until(len(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())),5,1)
         mailer_page.select_email(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())[0] + 1)
-        mailer_page.move_email()
+        mailer_page.move_email('Спам')
         wait_until(len(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())),5,0)
 
     def tearDown(self):

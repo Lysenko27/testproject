@@ -9,7 +9,6 @@ class MailerMainPage(Page):
         self.subject_relative_path = "span.mail-MessageSnippet-Item_subject"
         self.mail_checkbox_relative_path = "span[class='_nb-checkbox-flag _nb-checkbox-normal-flag']"
         self.move = '//span[@class="mail-Toolbar-Item-Text js-toolbar-item-title js-toolbar-item-title-folders-actions"]'
-        self.move_in_spam = '//a[@class="b-folders__folder__link js-action" and @title="Спам"]'
         self.driver = driver
 
     def compose_email(self):
@@ -26,9 +25,9 @@ class MailerMainPage(Page):
           f"({self.message_xpath})[{number}]"
         ).find_element_by_css_selector(self.mail_checkbox_relative_path).click()
 
-    def move_email(self):
+    def move_email(self,title):
         self.driver.find_element_by_xpath(self.move).click()
-        self.driver.find_element_by_xpath(self.move_in_spam).click()
+        self.driver.find_element_by_xpath('//a[@class="b-folders__folder__link js-action" and @title="%s"]'%title).click()
 
 
     def mail_on_page(self):
