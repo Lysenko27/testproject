@@ -9,7 +9,6 @@ class MailerMainPage(Page):
         self.subject_relative_path = "span.mail-MessageSnippet-Item_subject"
         self.mail_checkbox_relative_path = "span[class='_nb-checkbox-flag _nb-checkbox-normal-flag']"
         self.move = '//span[@class="mail-Toolbar-Item-Text js-toolbar-item-title js-toolbar-item-title-folders-actions"]'
-        self.folder_spam = '//a[@class="ns-view-folder ns-view-id-33 mail-NestedList-Item mail-NestedList-Item_level_1 toggles-Arrow-on-not-folded js-folders-item js-valid-drag-target fid-2" and @href="#spam"]'
         self.driver = driver
 
     def compose_email(self):
@@ -30,8 +29,8 @@ class MailerMainPage(Page):
         self.driver.find_element_by_xpath(self.move).click()
         self.driver.find_element_by_xpath('//a[@class="b-folders__folder__link js-action" and @title="%s"]'%title).click()
 
-    def move_folder_spam(self):
-        self.driver.find_element_by_xpath(self.folder_spam).click()
+    def go_to_folder(self,href):
+        self.driver.find_element_by_xpath('//a[@class="ns-view-folder ns-view-id-33 mail-NestedList-Item mail-NestedList-Item_level_1 toggles-Arrow-on-not-folded js-folders-item js-valid-drag-target fid-2" and @href="%s"]'%href).click()
 
     def mail_on_page(self):
         return(

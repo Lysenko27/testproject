@@ -15,7 +15,6 @@ class TestMail(unittest.TestCase):
         self.driver.get("https://mail.yandex.ru")
         LoginPage(self.driver).login('rocketbank-fan','qwerty$4')
 
-
     def test_mail_send_and_delete(self):
         mailer_page = MailerMainPage(self.driver)
         subject = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
@@ -36,7 +35,7 @@ class TestMail(unittest.TestCase):
         mailer_page.move_email('Спам')
         wait_until(len(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())),3,0)
         self.driver.implicitly_wait(10)
-        mailer_page.move_folder_spam()
+        mailer_page.go_to_folder('#spam')
         wait_until(len(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())),3,1)
 
     def tearDown(self):
