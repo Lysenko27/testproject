@@ -22,8 +22,7 @@ class MailerMainPage(Page):
 
     def select_email(self, number):
         self.driver.find_element_by_xpath(
-          f"({self.message_xpath})[{number}]"
-        ).find_element_by_css_selector(self.mail_checkbox_relative_path).click()
+          f"({self.message_xpath})[{number}]").find_element_by_css_selector(self.mail_checkbox_relative_path).click()
 
     def move_email(self,title):
         self.driver.find_element_by_xpath(self.move).click()
