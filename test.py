@@ -31,10 +31,13 @@ class TestMail(unittest.TestCase):
         mailer_page = MailerMainPage(self.driver)
         subject = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
         send_email(self.driver,subject)
-        wait_until(len(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())),5,1)
+        wait_until(len(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())),3,1)
         mailer_page.select_email(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())[0] + 1)
         mailer_page.move_email('Спам')
-        wait_until(len(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())),5,0)
+        wait_until(len(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())),3,0)
+        self.driver.implicitly_wait(10)
+        mailer_page.move_folder_spam()
+        wait_until(len(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())),3,1)
 
     def tearDown(self):
         self.driver.close()
