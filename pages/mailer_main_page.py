@@ -8,8 +8,8 @@ class MailerMainPage(Page):
         self.author_relative_path = "span.mail-MessageSnippet-FromText"
         self.subject_relative_path = "span.mail-MessageSnippet-Item_subject"
         self.mail_checkbox_relative_path = "span[class='_nb-checkbox-flag _nb-checkbox-normal-flag']"
-        self.move = '//*[@id="nb-1"]/body/div[2]/div[3]/div/div[2]/div[3]/div[2]/div[2]/div/div/div[2]/div/div/div[13]'
-        self.move_in_spam = '//*[@id="nb-8"]/div/div/div[2]/div[1]/div[4]/span/a'
+        self.move = '//span[@class="mail-Toolbar-Item-Text js-toolbar-item-title js-toolbar-item-title-folders-actions"]'
+        self.move_in_spam = '//a[@class="b-folders__folder__link js-action" and @title="Спам"]'
         self.driver = driver
 
     def compose_email(self):
