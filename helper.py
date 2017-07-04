@@ -16,16 +16,13 @@ def get_random_text_and_number(n=15, m=30):
     return ''.join([random.choice(string.ascii_letters) for i in range(random.randint(n, m))])
 
 
-def wait_until(quantity_email,timeout,required_quantity_email):
+def wait_until(func, timeout, required_quantity_email):
     new_date = datetime.datetime.now() + datetime.timedelta(seconds=timeout)
     event =False
     while datetime.datetime.now() < new_date:
-        if quantity_email == required_quantity_email:
+        if func() == required_quantity_email:
             event=True
             break
         time.sleep(0.25)
     if event == False: raise(BaseException('Событиене не наступило'))
-
-
-
 
