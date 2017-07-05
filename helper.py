@@ -3,12 +3,9 @@ import time
 import random
 import string
 
-def mail_indexes_of(subject, mail):
-    mail_indexes = []
-    for i in (range(0,len(mail))):
-        if mail[i]['subject'] == subject:
-          mail_indexes.append(i)
-    return(mail_indexes)
+def mail_indexes_of(subject, mails):
+    mail_indexes = [i for i in range(len(mails)) if mails[i]['subject'] == subject]
+    return mail_indexes
 
 
 def get_random_text_and_number(n=15, m=30):
