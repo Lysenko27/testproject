@@ -1,6 +1,7 @@
 from helper import wait_until, mail_indexes_of
 from pages.base import Page
-import time
+
+
 class MailerMainPage(Page):
     def __init__(self, driver):
         self.delete_xpath = "//span[@class='mail-Toolbar-Item-Text js-toolbar-item-title js-toolbar-item-title-delete']"

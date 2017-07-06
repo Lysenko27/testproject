@@ -1,6 +1,4 @@
-from helper import wait_until, mail_indexes_of
 from pages.base import Page
-from pages.mailer_main_page import MailerMainPage
 
 
 class ComposeMailPage(Page):
@@ -11,7 +9,8 @@ class ComposeMailPage(Page):
         self.send_button_xpath = '//span[@data-key="view=compose-send-link"]//span[@class="_nb-button-text"]'
         self.driver = driver
 
-    def send_email(self, recipient, subject, content):
+    def send_email(self, recipient, subject, content,mailer_page):
+        mailer_page.compose_email()
         self.driver.find_element_by_xpath(self.from_xpath).click()
         self.driver.find_element_by_xpath(self.from_xpath).send_keys(recipient)
         self.driver.find_element_by_xpath(self.from_xpath).click()

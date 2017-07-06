@@ -1,8 +1,11 @@
 import unittest
 from selenium import webdriver
-from pages.login_page import *
-from shortcuts import *
-from helper import get_random_text_and_number
+
+from helper import wait_until, mail_indexes_of
+from pages.compose_mail_page import ComposeMailPage
+from pages.login_page import LoginPage
+from pages.mailer_main_page import MailerMainPage
+from shortcuts import send_email
 import datetime
 
 
