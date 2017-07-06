@@ -1,6 +1,5 @@
 import unittest
 from selenium import webdriver
-from settings import setting
 from helper import wait_until, mail_indexes_of
 from pages.compose_mail_page import ComposeMailPage
 from pages.login_page import LoginPage
