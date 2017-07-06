@@ -2,7 +2,7 @@ import unittest
 from selenium import webdriver
 from pages.login_page import *
 from shortcuts import *
-from helper import *
+from helper import get_random_text_and_number
 import datetime
 
 
@@ -14,29 +14,23 @@ class TestMail(unittest.TestCase):
         self.driver.implicitly_wait(10)
         self.driver.get("https://mail.yandex.ru")
         LoginPage(self.driver).login('rocketbank-fan','qwerty$4')
+        self.mailer_page = MailerMainPage(self.driver)
+        self.current_page = ComposeMailPage(self.driver)
 
     def test_mail_send_and_delete(self):
-        mailer_page = MailerMainPage(self.driver)
         subject = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
-        send_email(self.driver,subject)
-        wait_until(lambda: len(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())),6,1)
+        send_email(self.driver,self.mailer_page,self.current_page,subject)
          # assert that we have exactly one mail
-        mailer_page.select_email(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())[0] + 1)
-        mailer_page.delete_selected()
-        wait_until(lambda: len(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())),6,0)
+        self.mailer_page.delete_selected(subject)
          # should be zero emails by now
 
     def test_move_folder(self):
-        mailer_page = MailerMainPage(self.driver)
         subject = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
-        send_email(self.driver,subject)
-        wait_until(lambda: len(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())),6,1)
-        mailer_page.select_email(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())[0] + 1)
-        mailer_page.move_email('Спам')
-        wait_until(lambda: len(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())),6,0)
-        self.driver.implicitly_wait(10)
-        mailer_page.go_to_folder('#spam')
-        wait_until(lambda: len(mail_indexes_of(subject, mailer_page.reload_and_fetch_mail())),6,1)
+        send_email(self.driver,self.mailer_page,self.current_page,subject)
+        self.mailer_page.move_email('Спам',subject)
+        self.mailer_page.go_to_folder('#spam',subject)
+        wait_until(lambda: len(mail_indexes_of(subject, self.mailer_page.reload_and_fetch_mail())), 6, 1)
+
 
     def tearDown(self):
         self.driver.close()

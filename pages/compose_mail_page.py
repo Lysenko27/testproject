@@ -1,4 +1,8 @@
+from helper import wait_until, mail_indexes_of
 from pages.base import Page
+from pages.mailer_main_page import MailerMainPage
+
+
 class ComposeMailPage(Page):
     def __init__(self, driver):
         self.from_xpath = '//div[@is="x-bubbles"]'
