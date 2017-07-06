@@ -37,7 +37,7 @@ class MailerMainPage(Page):
     def delete_selected(self,subject):
         self.select_email(subject)
         self.driver.find_element_by_xpath(self.delete_xpath).click()
-        wait_until(lambda: len(mail_indexes_of(subject, self.reload_and_fetch_mail())), 6, 0)
+        wait_until(lambda: len(mail_indexes_of(subject, self.reload_and_fetch_mail())), 10, 0)
 
     def go_to_folder(self, folder):
         self.driver.find_element_by_xpath(f'//a[@href="#{folder}"]').click()
@@ -51,7 +51,7 @@ class MailerMainPage(Page):
         self.select_email(subject)
         self.driver.find_element_by_xpath(self.move).click()
         self.driver.find_element_by_xpath('//a[@class="b-folders__folder__link js-action" and @title="%s"]'%title).click()
-        wait_until(lambda: len(mail_indexes_of(subject, self.reload_and_fetch_mail())), 6, 0)
+        wait_until(lambda: len(mail_indexes_of(subject, self.reload_and_fetch_mail())), 10, 0)
 
     def go_to_folder(self,href,subject):
         self.driver.find_element_by_xpath('//a[@class="ns-view-folder ns-view-id-33 mail-NestedList-Item mail-NestedList-Item_level_1 toggles-Arrow-on-not-folded js-folders-item js-valid-drag-target fid-2" and @href="%s"]'%href).click()
