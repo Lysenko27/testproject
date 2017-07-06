@@ -32,7 +32,7 @@ class TestMail(unittest.TestCase):
         send_email(self.driver,self.mailer_page,self.current_page,subject)
         self.mailer_page.move_email('Спам',subject)
         self.mailer_page.go_to_folder('#spam',subject)
-        wait_until(lambda: len(mail_indexes_of(subject, self.mailer_page.reload_and_fetch_mail())), 10, 1)
+        wait_until(lambda: len(mail_indexes_of(mails=self.mailer_page.reload_and_fetch_mail(), subject=subject)), 10, 1)
 
 
     def tearDown(self):

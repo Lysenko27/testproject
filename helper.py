@@ -3,9 +3,13 @@ import time
 import random
 import string
 
-def mail_indexes_of(subject, mails):
-    mail_indexes = [i for i in range(len(mails)) if mails[i]['subject'] == subject]
-    return mail_indexes
+def mail_indexes_of( mails,subject=None,author=None):
+    if subject == None and author != None:
+        return [i for i in range(len(mails)) if mails[i]['author'] == author]
+    elif subject != None and author == None:
+        return [i for i in range(len(mails)) if mails[i]['subject'] == subject]
+    elif subject != None and author != None:
+        return [i for i in range(len(mails)) if mails[i]['subject'] == subject and mails[i]['author'] == author]
 
 
 def get_random_text_and_number(n=15, m=30):
