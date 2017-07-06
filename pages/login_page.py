@@ -1,4 +1,3 @@
-from settings import setting
 from pages.base import Page
 class LoginPage(Page):
     def __init__(self, driver):
